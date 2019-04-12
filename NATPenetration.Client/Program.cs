@@ -9,8 +9,8 @@ namespace NATPenetration.Client
     {
         static void Main(string[] args)
         {
-            string host = "115.21.X.X";//服务端IP地址
-            int port = 555;
+            string host = "192.168.1.128";//服务端IP地址
+            int port = 10000;
             Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //设置端口可复用
             clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
@@ -48,15 +48,16 @@ namespace NATPenetration.Client
                     Console.WriteLine("Connect：成功{0},{1}", otherIp, otherPort);
                     break;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Connect：失败");
+                    Console.WriteLine("Connect：失败"+ex.ToString());
                     // otherPort++;//如果是对称NAT，则有可能客户端的端口号已经改变，正常有规律的应该是顺序加1，可以尝试+1再试（我使用手机热点连接的时候端口号就变成+1的了）除非是碰到随机端口，那就不行了。
                 }
 
             }
             while (true)
             {
+
                 mySocket.Send(Encoding.ASCII.GetBytes("hello,the other client!"));
 
                 byte[] recv = new byte[4096];

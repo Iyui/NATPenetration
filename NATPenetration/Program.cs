@@ -8,8 +8,8 @@ namespace NATPenetration
     {
         static void Main(string[] args)
         {
-            int port = 555;
-            IPEndPoint ipe = new IPEndPoint(IPAddress.Any, port);
+            int port = 10000;
+            IPEndPoint ipe = new IPEndPoint(IPAddress.Any, port);//new IPEndPoint(IPAddress.Any, port);//IPAddress.Parse("180.175.63.122")
             Socket sSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             sSocket.Bind(ipe);
             sSocket.Listen(100);
